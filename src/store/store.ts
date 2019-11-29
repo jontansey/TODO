@@ -13,10 +13,10 @@ const composeEnhancers = composeWithDevTools({});
 
 export const rootReducer = makeRootReducer(history);
 
-export default function configureStore() {
+export default function configureStore(initialState = {}) {
   const store = createStore(
     rootReducer,
-    {},
+    initialState,
     composeEnhancers(applyMiddleware(routerMiddleware(history)))
   );
 
