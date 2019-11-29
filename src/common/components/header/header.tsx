@@ -8,7 +8,7 @@ import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../button";
 import { Container } from "react-grid-system";
 
-export const Header: React.FC = () => {
+export const Header: React.FC = ({ ...props }) => {
   const firebase = useFirebase();
   const auth = useSelector(({ firebase }: TAppState) => firebase.auth);
 
@@ -19,7 +19,7 @@ export const Header: React.FC = () => {
   const authReady = isLoaded(auth) && !isEmpty(auth);
 
   return (
-    <StyledHeader>
+    <StyledHeader {...props}>
       <Container>
         <InnerHeader>
           <div>
@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
           </div>
 
           <div>
-            <User>
+            <User data-testid="header__username">
               <FontAwesomeIcon icon={faUser} /> {authReady && auth.displayName}
             </User>
             <Button onClick={logout} disabled={!authReady}>
